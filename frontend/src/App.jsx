@@ -1,85 +1,3 @@
-// import { useState, useEffect } from "react";
-// import "./App.css";
-// import Header from "./assets/header";
-// import Sidebar from "./assets/sidebar";
-// import Home from "./assets/home";
-// import Damage_Reports from "./assets/damage_reports";
-// import Welcome from "./assets/welcome";
-// import Login from "./assets/login";
-// import ForgotPassword from "./assets/forgotpassword";
-// import Register from "./assets/register";
-// import Contact from "./assets/contact";
-// import Otp from "./assets/otp";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import EmailHistory from "./assets/EmailHistory";
-// import AllQueries from "./assets/queries";
-
-// function App() {
-//   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
-//   const [isMobile, setIsMobile] = useState(false);
-
-//   const toggleSidebar = () => {
-//     setOpenSidebarToggle(!openSidebarToggle);
-//   };
-
-//   useEffect(() => {
-//     const handleResize = () => {
-//       setIsMobile(window.innerWidth <= 768);
-//     };
-//     window.addEventListener("resize", handleResize);
-//     handleResize();
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-
-//   return (
-//     <Router>
-//       <Routes>
-//         {/* Public routes: No layout */}
-//         <Route path="/" element={<Welcome />} />
-//         <Route path="/login" element={<Login />} />
-//         <Route path="/register" element={<Register />} />
-//         <Route path="/forgotpassword" element={<ForgotPassword />} />
-//         <Route path="/otp" element={<Otp />} />
-//         <Route path="/contact" element={<Contact />} />
-
-//         {/* Private/dashboard layout routes */}
-//         <Route
-//           path="/*"
-//           element={
-//             <div className="grid-container">
-//               <Header openSidebar={toggleSidebar} />
-//               {isMobile && (
-//                 <button className="hamburger-button" onClick={toggleSidebar}>
-//                   <div className="bar"></div>
-//                   <div className="bar"></div>
-//                   <div className="bar"></div>
-//                 </button>
-//               )}
-//               <Sidebar
-//                 openSidebarToggle={openSidebarToggle}
-//                 toggleSidebar={toggleSidebar}
-//               />
-//               <main className="main-content">
-//                 <Routes>
-//                   <Route path="/home" element={<Home />} />
-//                   <Route path="/damage_reports" element={<Damage_Reports />} />
-//                   <Route path="/EmailHistory" element={<EmailHistory />} />
-//                   <Route path="/queries" element={<AllQueries />} />
-//                 </Routes>
-//               </main>
-//             </div>
-//           }
-//         />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-
-// export default App;
-
-
-
 import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./assets/header";
@@ -115,47 +33,36 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        {/* Public routes */}
-        <Route path="/" element={<Welcome />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/otp" element={<Otp />} />
-        <Route path="/contact" element={<Contact />} />
+      <div className="grid-container">
+        <Header openSidebar={toggleSidebar} />
 
-        {/* Dashboard layout routes nested under /dashboard */}
-        <Route
-          path="/dashboard/*"
-          element={
-            <div className="grid-container">
-              <Header openSidebar={toggleSidebar} />
-              {isMobile && (
-                <button className="hamburger-button" onClick={toggleSidebar}>
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                </button>
-              )}
-              <Sidebar
-                openSidebarToggle={openSidebarToggle}
-                toggleSidebar={toggleSidebar}
-              />
-              <main className="main-content">
-                <Routes>
-                  <Route path="home" element={<Home />} />
-                  <Route path="damage_reports" element={<Damage_Reports />} />
-                  <Route path="EmailHistory" element={<EmailHistory />} />
-                  <Route path="queries" element={<AllQueries />} />
-                </Routes>
-              </main>
-            </div>
-          }
-        />
-      </Routes>
+        {isMobile && (
+          <button className="hamburger-button" onClick={toggleSidebar}>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+          </button>
+        )}
+
+        <Sidebar openSidebarToggle={openSidebarToggle} toggleSidebar={toggleSidebar} />
+
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/damage_reports" element={<Damage_Reports />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/otp" element={<Otp />} />
+            <Route path="/EmailHistory" element={<EmailHistory />} />
+            <Route path="/queries" element={<AllQueries />} />
+          </Routes>
+        </main>
+      </div>
     </Router>
   );
 }
 
 export default App;
-
