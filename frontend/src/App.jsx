@@ -33,36 +33,47 @@ function App() {
 
   return (
     <Router>
-      <div className="grid-container">
-        <Header openSidebar={toggleSidebar} />
+      <Routes>
+        {/* Public routes: No layout */}
+        <Route path="/" element={<Welcome />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/otp" element={<Otp />} />
+        <Route path="/contact" element={<Contact />} />
 
-        {isMobile && (
-          <button className="hamburger-button" onClick={toggleSidebar}>
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
-          </button>
-        )}
-
-        <Sidebar openSidebarToggle={openSidebarToggle} toggleSidebar={toggleSidebar} />
-
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/damage_reports" element={<Damage_Reports />} />
-            <Route path="/forgotpassword" element={<ForgotPassword />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/otp" element={<Otp />} />
-            <Route path="/EmailHistory" element={<EmailHistory />} />
-            <Route path="/queries" element={<AllQueries />} />
-          </Routes>
-        </main>
-      </div>
+        {/* Private/dashboard layout routes */}
+        <Route
+          path="/*"
+          element={
+            <div className="grid-container">
+              <Header openSidebar={toggleSidebar} />
+              {isMobile && (
+                <button className="hamburger-button" onClick={toggleSidebar}>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                </button>
+              )}
+              <Sidebar
+                openSidebarToggle={openSidebarToggle}
+                toggleSidebar={toggleSidebar}
+              />
+              <main className="main-content">
+                <Routes>
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/damage_reports" element={<Damage_Reports />} />
+                  <Route path="/EmailHistory" element={<EmailHistory />} />
+                  <Route path="/queries" element={<AllQueries />} />
+                </Routes>
+              </main>
+            </div>
+          }
+        />
+      </Routes>
     </Router>
   );
 }
+
 
 export default App;
