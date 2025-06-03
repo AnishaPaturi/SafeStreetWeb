@@ -536,6 +536,10 @@ app.get('/api/reports/new', async (req, res) => {
 });
 
 
+app.get('/', (req, res) => {
+  res.send('API is working!');
+});
+
 // Server Start
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
